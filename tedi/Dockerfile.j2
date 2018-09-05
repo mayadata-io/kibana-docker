@@ -1,20 +1,5 @@
-# This Dockerfile was generated from the template at templates/Dockerfile.j2
-{% if artifacts_dir -%}
-{%   set url_root = 'http://localhost:8000/kibana/target' -%}
-{% elif staging_build_num -%}
-{%   set version_tag = elastic_version + '-' + staging_build_num -%}
-{%   set url_root = 'https://staging.elastic.co/%s/downloads/kibana' % version_tag -%}
-{% else -%}
-{%   set version_tag = elastic_version -%}
-{%   set url_root = 'https://artifacts.elastic.co/downloads/kibana' -%}
-{% endif -%}
-
-{% if image_flavor == 'oss' -%}
-{%   set tarball = 'kibana-oss-%s-linux-x86_64.tar.gz' % elastic_version -%}
-{% else -%}
-{%   set tarball = 'kibana-%s-linux-x86_64.tar.gz' % elastic_version -%}
-{% endif -%}
-
+# This Dockerfile was generated from the template at tedi/Dockerfile.j2
+{% set tarball = 'kibana-%s-%s.tar.gz' % (image_flavor, elastic_version) -%}
 
 FROM centos:7
 EXPOSE 5601
@@ -24,11 +9,12 @@ RUN yum update -y && yum install -y fontconfig freetype && yum clean all
 
 WORKDIR /usr/share/kibana
 
+COPY {{ tarball }} /opt
 # Set gid to 0 for kibana and make group permission similar to that of user
 # This is needed, for example, for Openshift Open:
 # https://docs.openshift.org/latest/creating_images/guidelines.html
 # and allows Kibana to run with an uid
-RUN curl -Ls {{ url_root }}/{{ tarball }} | tar --strip-components=1 -zxf - && \
+RUN tar --strip-components=1 -zxf /opt/{{ tarball }} && \
     ln -s /usr/share/kibana /opt/kibana && \
     chown -R 1000:0 . && \
     chmod -R g=u /usr/share/kibana && \
@@ -38,11 +24,11 @@ ENV ELASTIC_CONTAINER true
 ENV PATH=/usr/share/kibana/bin:$PATH
 
 # Set some Kibana configuration defaults.
-COPY --chown=1000:0 config/kibana-{{ image_flavor }}.yml /usr/share/kibana/config/kibana.yml
+COPY --chown=1000:0 kibana.yml /usr/share/kibana/config/kibana.yml
 
 # Add the launcher/wrapper script. It knows how to interpret environment
 # variables and translate them to Kibana CLI options.
-COPY --chown=1000:0 bin/kibana-docker /usr/local/bin/
+COPY --chown=1000:0 kibana-docker /usr/local/bin/
 
 # Add a self-signed SSL certificate for use in examples.
 COPY --chown=1000:0 ssl/kibana.example.org.* /usr/share/kibana/config/
