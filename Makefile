@@ -81,12 +81,9 @@ build-from-local-artifacts: venv dockerfile docker-compose
 # Build images from the latest snapshots on snapshots.elastic.co
 from-snapshot:
 	rm -rf snapshots
-	ls -lrth
 	mkdir -p snapshots/kibana/target
-	(cd snapshots/kibana/target && cp $$HOME/kibana-build/target/kibana-oss-6.4.0-linux-x86_64.tar.gz .)
-	ls -lrth	
+	(cd snapshots/kibana/target && cp $$HOME/kibana-build/target/kibana-oss-6.4.0-SNAPSHOT-linux-x86_64.tar.gz ./kibana-oss-6.4.0-linux-x86_64.tar.gz)	
 	ARTIFACTS_DIR=$$PWD/snapshots make release-manager-snapshot
-	echo $$ARTIFACTS_DIR
 
 # Push the image to the dedicated push endpoint at "push.docker.elastic.co"
 push: test
