@@ -1,5 +1,5 @@
 SHELL=/bin/bash
-ELASTIC_REGISTRY ?= docker.elastic.co
+ELASTIC_REGISTRY ?= mayadataio
 
 export PATH := ./bin:./venv/bin:$(PATH)
 
