@@ -4,7 +4,7 @@ ELASTIC_REGISTRY ?= mayadataio
 export PATH := ./bin:./venv/bin:$(PATH)
 
 # Determine the version to build. Override by setting ELASTIC_VERSION env var.
-ELASTIC_VERSION := 6.4.0
+ELASTIC_VERSION := $(shell ./bin/elastic-version)
 
 ifdef STAGING_BUILD_NUM
   VERSION_TAG=$(ELASTIC_VERSION)-${STAGING_BUILD_NUM}
@@ -83,7 +83,7 @@ from-snapshot:
 	rm -rf snapshots
 	mkdir -p snapshots/kibana/target
 	(cd snapshots/kibana/target && \
-	  cp $$HOME/kibana-build/target/kibana-6.4.0-SNAPSHOT-linux-x86_64.tar.gz .)
+	  cp $$HOME/kibana-build/target/kibana-oss-6.4.0-SNAPSHOT-linux-x86_64.tar.gz .)
 	ARTIFACTS_DIR=$$PWD/snapshots make release-manager-snapshot
 
 # Push the image to the dedicated push endpoint at "push.docker.elastic.co"
