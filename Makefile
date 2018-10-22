@@ -86,7 +86,7 @@ from-snapshot:
 	cd snapshots/kibana/target
 	pwd
 	cp $$HOME/kibana-build/target/kibana-6.4.0-SNAPSHOT-linux-x86_64.tar.gz . 
-	cp $$HOME/kibana-build/target/kibana-oss-6.4.0-SNAPSHOT-linux-x86_64.tar.gz .
+	cp $$HOME/kibana-build/target/kibana-oss-6.4.0-SNAPSHOT-linux-x86_64.tar.gz ./kibana-oss-6.4.0-linux-x86_64.tar.gz
 	ls -lrth	
 	ARTIFACTS_DIR=$$PWD/snapshots 
 	make release-manager-snapshot
