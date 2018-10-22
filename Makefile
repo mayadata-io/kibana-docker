@@ -83,8 +83,6 @@ from-snapshot:
 	rm -rf snapshots
 	mkdir -p snapshots/kibana/target
 	(cd snapshots/kibana/target && \
-	  #wget https://snapshots.elastic.co/downloads/kibana/kibana-$(ELASTIC_VERSION)-SNAPSHOT-linux-x86_64.tar.gz && \
-	  #wget https://snapshots.elastic.co/downloads/kibana/kibana-oss-$(ELASTIC_VERSION)-SNAPSHOT-linux-x86_64.tar.gz
 	  cp $HOME/kibana-build/kibana-oss-6.4.0-SNAPSHOT-linux-x86_64.tar.gz .)
 	ARTIFACTS_DIR=$$PWD/snapshots make release-manager-snapshot
 
