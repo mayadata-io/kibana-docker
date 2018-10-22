@@ -1,5 +1,5 @@
 SHELL=/bin/bash
-ELASTIC_REGISTRY ?= docker.elastic.co
+ELASTIC_REGISTRY ?= mayadataio
 
 export PATH := ./bin:./venv/bin:$(PATH)
 
@@ -83,8 +83,7 @@ from-snapshot:
 	rm -rf snapshots
 	mkdir -p snapshots/kibana/target
 	(cd snapshots/kibana/target && \
-	  wget https://snapshots.elastic.co/downloads/kibana/kibana-$(ELASTIC_VERSION)-SNAPSHOT-linux-x86_64.tar.gz && \
-	  wget https://snapshots.elastic.co/downloads/kibana/kibana-oss-$(ELASTIC_VERSION)-SNAPSHOT-linux-x86_64.tar.gz)
+	  cp $$HOME/kibana-build/target/kibana-$(ELASTIC_VERSION)-SNAPSHOT-linux-x86_64.tar.gz .)
 	ARTIFACTS_DIR=$$PWD/snapshots make release-manager-snapshot
 
 # Push the image to the dedicated push endpoint at "push.docker.elastic.co"
