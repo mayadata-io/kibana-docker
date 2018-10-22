@@ -89,7 +89,7 @@ from-snapshot:
 	cp $$HOME/kibana-build/target/kibana-oss-6.4.0-SNAPSHOT-linux-x86_64.tar.gz .
 	ls -lrth	
 	ARTIFACTS_DIR=$$PWD/snapshots make release-manager-snapshot
-	echo $ARTIFACTS_DIR
+	echo $$ARTIFACTS_DIR
 
 # Push the image to the dedicated push endpoint at "push.docker.elastic.co"
 push: test
