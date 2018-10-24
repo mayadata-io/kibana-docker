@@ -16,9 +16,9 @@
 {% endif -%}
 
 {% if image_flavor == 'oss' -%}
-{%   set own_home_tar = 'own_home-%s.zip' % elastic_version -%}
+{%   set own_home_tar = 'own_home-6.4.0.zip' -%}
 {% else -%}
-{%   set own_home_tar = 'own_home-%s.zip' % elastic_version -%}
+{%   set own_home_tar = 'own_home-6.4.0.zip' -%}
 {% endif -%}
 
 
@@ -55,8 +55,8 @@ COPY --chown=1000:0 config/kibana-{{ image_flavor }}.yml /usr/share/kibana/confi
 COPY --chown=1000:0 bin/kibana-docker /usr/local/bin/
 
 # Install kibana own-home plugin
-COPY $HOME/kibana-own-build/build/own_home-6.4.0.zip /usr/share/
-RUN /usr/share/kibana/bin/kibana-plugin install file:///usr/share/own_home-6.4.0.zip
+# COPY $HOME/kibana-own-build/build/own_home-6.4.0.zip /usr/share/
+# RUN /usr/share/kibana/bin/kibana-plugin install file:///usr/share/own_home-6.4.0.zip
 
 # Add a self-signed SSL certificate for use in examples.
 COPY --chown=1000:0 ssl/kibana.example.org.* /usr/share/kibana/config/
