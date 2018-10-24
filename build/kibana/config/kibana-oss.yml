@@ -3,4 +3,11 @@
 
 server.name: kibana
 server.host: "0"
-elasticsearch.url: http://elasticsearch:9200
+elasticsearch.url: http://localhost:19200
+elasticsearch.customHeaders: { x-proxy-roles: admin, x-scope-orgid: xyz, X-Forwarded-For: 0.0.0.0 }
+elasticsearch.ssl.verificationMode: none
+
+own_home.proxy_user_header: x-scope-orgid
+own_home.elasticsearch.url: http://elasticsearch-logging:9200
+
+elasticsearch.requestHeadersWhitelist: [authorization, x-scope-orgid]
