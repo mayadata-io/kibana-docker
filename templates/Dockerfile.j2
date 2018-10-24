@@ -40,8 +40,8 @@ RUN curl -Ls {{ url_root }}/{{ tarball }} | tar --strip-components=1 -zxf - && \
     chmod -R g=u /usr/share/kibana && \
     find /usr/share/kibana -type d -exec chmod g+s {} \;
 
-RUN curl -Ls {{ url_root }}/{{ own_home_tar }}
-RUN /usr/share/kibana/bin/kibana-plugin install {{ own_home_tar }}
+RUN curl -L {{ url_root }}/{{ own_home_tar }} && \
+    /usr/share/kibana/bin/kibana-plugin install {{ own_home_tar }}
 
 #own_home-6.4.0.zip 
 ENV ELASTIC_CONTAINER true
