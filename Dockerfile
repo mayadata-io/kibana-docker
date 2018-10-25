@@ -26,14 +26,14 @@ COPY ./own_home-6.4.0.zip /usr/share/
 RUN /usr/share/kibana/bin/kibana-plugin install file:///usr/share/own_home-6.4.0.zip
 
 # Set some Kibana configuration defaults.
-COPY --chown=1000:0 config/kibana-oss.yml /usr/share/kibana/config/kibana.yml
+COPY --chown=1000:0 ./build/kibana/config/kibana-oss.yml /usr/share/kibana/config/kibana.yml
 
 # Add the launcher/wrapper script. It knows how to interpret environment
 # variables and translate them to Kibana CLI options.
-COPY --chown=1000:0 bin/kibana-docker /usr/local/bin/
+COPY --chown=1000:0 ./build/kibana/bin/kibana-docker /usr/local/bin/
 
 # Add a self-signed SSL certificate for use in examples.
-COPY --chown=1000:0 ssl/kibana.example.org.* /usr/share/kibana/config/
+COPY --chown=1000:0 ./build/kibana/ssl/kibana.example.org.* /usr/share/kibana/config/
 
 # Ensure gid 0 write permissions for Openshift.
 RUN find /usr/share/kibana -gid 0 -and -not -perm /g+w -exec chmod g+w {} \;
