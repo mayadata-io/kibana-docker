@@ -11,7 +11,7 @@ WORKDIR /usr/share/kibana
 # This is needed, for example, for Openshift Open:
 # https://docs.openshift.org/latest/creating_images/guidelines.html
 # and allows Kibana to run with an uid
-COPY $HOME/kibana-build/target/kibana-oss-6.4.0-SNAPSHOT-linux-x86_64.tar.gz /usr/share/kibana
+COPY ./kibana-oss-6.4.0-SNAPSHOT-linux-x86_64.tar.gz /usr/share/kibana
 RUN tar --strip-components=1 -zxf kibana-oss-6.4.0-SNAPSHOT-linux-x86_64.tar.gz && \
   ln -s /usr/share/kibana /opt/kibana && \
   chown -R 1000:0 . && \
@@ -22,7 +22,7 @@ ENV ELASTIC_CONTAINER true
 ENV PATH=/usr/share/kibana/bin:$PATH
 
 # Install kibana own-home plugin
-COPY $HOME/kibana-own-build/build/own_home-6.4.0.zip /usr/share/
+COPY ./own_home-6.4.0.zip /usr/share/
 RUN /usr/share/kibana/bin/kibana-plugin install file:///usr/share/own_home-6.4.0.zip
 
 # Set some Kibana configuration defaults.
