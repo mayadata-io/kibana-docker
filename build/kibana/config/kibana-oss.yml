@@ -8,6 +8,9 @@ elasticsearch.customHeaders: { x-proxy-roles: admin, x-scope-orgid: xyz, X-Forwa
 elasticsearch.ssl.verificationMode: none
 
 own_home.proxy_user_header: x-scope-orgid
-own_home.elasticsearch.url: http://elasticsearch-logging:9200
+own_home.elasticsearch.url: "${OWN_HOME_ELASTICSEARCH_URL}" # this will help in passing the elasticsearch service from kibana deployment
 
 elasticsearch.requestHeadersWhitelist: [authorization, x-scope-orgid]
+
+xpack.apm.enabled: false
+xpack.monitoring.ui.enabled: false
