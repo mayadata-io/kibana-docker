@@ -12,5 +12,5 @@ own_home.elasticsearch.url: "${OWN_HOME_ELASTICSEARCH_URL}" # this will help in 
 
 elasticsearch.requestHeadersWhitelist: [authorization, x-scope-orgid]
 
-xpack.apm.enabled: false
-xpack.monitoring.ui.enabled: false
+# xpack.apm.enabled: false
+# xpack.monitoring.ui.enabled: false
