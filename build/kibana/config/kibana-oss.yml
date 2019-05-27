@@ -11,3 +11,6 @@ own_home.proxy_user_header: x-scope-orgid
 own_home.elasticsearch.url: "${OWN_HOME_ELASTICSEARCH_URL}" # this will help in passing the elasticsearch service from kibana deployment
 
 elasticsearch.requestHeadersWhitelist: [authorization, x-scope-orgid]
+
+xpack.apm.enabled: false
+xpack.monitoring.ui.enabled: false
