@@ -14,3 +14,6 @@ elasticsearch.requestHeadersWhitelist: [authorization, x-scope-orgid]
 
 # xpack.apm.enabled: false
 # xpack.monitoring.ui.enabled: false
+
+logging.verbose: true
+xpack.reporting.queue.timeout: 600000
