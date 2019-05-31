@@ -17,3 +17,6 @@ elasticsearch.requestHeadersWhitelist: [authorization, x-scope-orgid]
 
 logging.verbose: true
 xpack.reporting.queue.timeout: 600000
+xpack.reporting.kibanaServer.port: 5601
+xpack.reporting.kibanaServer.protocol: http
+xpack.reporting.kibanaServer.hostname: 10.11.248.214
