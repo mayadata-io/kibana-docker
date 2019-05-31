@@ -12,11 +12,26 @@ own_home.elasticsearch.url: "${OWN_HOME_ELASTICSEARCH_URL}" # this will help in 
 
 elasticsearch.requestHeadersWhitelist: [authorization, x-scope-orgid]
 
-# xpack.apm.enabled: false
-# xpack.monitoring.ui.enabled: false
+# verbose can be used to see debug logs
+# logging.verbose: true
 
-logging.verbose: true
+# increase from default (which is 2 mins (120000 milliseconds)) to 10 mins (600000 milliseconds)
+# it can take more than 2 mins to generate csv for large amount of logs.
 xpack.reporting.queue.timeout: 600000
-xpack.reporting.kibanaServer.port: 443
-xpack.reporting.kibanaServer.protocol: https
-xpack.reporting.kibanaServer.hostname: staging-app.mayaonline.io
+
+# max size of csv file that can be generate, can be increased.
+# Default is 10 mb (10485760 bytes)
+# xpack.reporting.csv.maxSizeBytes: 10485760
+
+# more reporting configurations: https://www.elastic.co/guide/en/kibana/current/reporting-settings-kb.html#reporting-kibana-server-settings
+
+# disable features which are not being used in kibana and also to hide icons.
+# this will disable the api's as well.
+xpack.apm.enabled: false
+xpack.monitoring.ui.enabled: false
+xpack.monitoring.enabled: false
+xpack.ml.enabled: false
+xpack.graph.enabled: false
+xpack.watcher.enabled: false
+xpack.grokdebugger.enabled: false
+xpack.searchprofiler.enabled: false
