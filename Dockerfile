@@ -21,15 +21,6 @@ RUN tar --strip-components=1 -zxf kibana-6.4.0-SNAPSHOT-linux-x86_64.tar.gz && \
 ENV ELASTIC_CONTAINER true
 ENV PATH=/usr/share/kibana/bin:$PATH
 
-# Install kibana own-home plugin
-COPY ./own_home-6.4.0.zip /usr/share/
-RUN /usr/share/kibana/bin/kibana-plugin install file:///usr/share/own_home-6.4.0.zip
-
-# remove optimize directory from root permission as it is not being deleted by kibana and gives permission denied error
-# during the server optimizer run
-# This error occured when plugin is disabled from kibana config (xpack.apm.enabled: false)
-RUN rm -rf /usr/share/kibana/optimize/bundles
-
 # Set some Kibana configuration defaults.
 COPY --chown=1000:0 ./build/kibana/config/kibana-oss.yml /usr/share/kibana/config/kibana.yml
 
@@ -50,6 +41,10 @@ RUN groupadd --gid 1000 kibana && \
       kibana
 
 USER kibana
+
+# Set own home env variable as default value and Install kibana own-home plugin
+COPY ./own_home-6.4.0.zip /usr/share/
+RUN export OWN_HOME_ELASTICSEARCH_URL="http://localhost:9200/" && /usr/share/kibana/bin/kibana-plugin install file:///usr/share/own_home-6.4.0.zip
 
 LABEL org.label-schema.schema-version="1.0" \
   org.label-schema.vendor="Elastic" \
