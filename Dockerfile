@@ -25,6 +25,11 @@ ENV PATH=/usr/share/kibana/bin:$PATH
 COPY ./own_home-6.4.0.zip /usr/share/
 RUN /usr/share/kibana/bin/kibana-plugin install file:///usr/share/own_home-6.4.0.zip
 
+# remove optimize directory from root permission as it is not being deleted by kibana and gives permission denied error
+# during the server optimizer run
+# This error occured when plugin is disabled from kibana config (xpack.apm.enabled: false)
+RUN rm -rf /usr/share/kibana/optimize/bundles
+
 # Set some Kibana configuration defaults.
 COPY --chown=1000:0 ./build/kibana/config/kibana-oss.yml /usr/share/kibana/config/kibana.yml
 
