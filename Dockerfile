@@ -11,8 +11,8 @@ WORKDIR /usr/share/kibana
 # This is needed, for example, for Openshift Open:
 # https://docs.openshift.org/latest/creating_images/guidelines.html
 # and allows Kibana to run with an uid
-COPY ./kibana-6.4.0-SNAPSHOT-linux-x86_64.tar.gz /usr/share/kibana
-RUN tar --strip-components=1 -zxf kibana-6.4.0-SNAPSHOT-linux-x86_64.tar.gz && \
+COPY ./kibana-oss-6.4.0-SNAPSHOT-linux-x86_64.tar.gz /usr/share/kibana
+RUN tar --strip-components=1 -zxf kibana-oss-6.4.0-SNAPSHOT-linux-x86_64.tar.gz && \
   ln -s /usr/share/kibana /opt/kibana && \
   chown -R 1000:0 . && \
   chmod -R g=u /usr/share/kibana && \
