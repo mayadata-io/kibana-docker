@@ -17,7 +17,7 @@ elasticsearch.requestHeadersWhitelist: [authorization, x-scope-orgid]
 
 # increase from default (which is 2 mins (120000 milliseconds)) to 10 mins (600000 milliseconds)
 # it can take more than 2 mins to generate csv for large amount of logs.
-xpack.reporting.queue.timeout: 600000
+# xpack.reporting.queue.timeout: 600000
 
 # max size of csv file that can be generate, can be increased.
 # Default is 10 mb (10485760 bytes)
@@ -27,11 +27,11 @@ xpack.reporting.queue.timeout: 600000
 
 # disable features which are not being used in kibana and also to hide icons.
 # this will disable the api's as well.
-xpack.apm.enabled: false
-xpack.monitoring.ui.enabled: false
-xpack.monitoring.enabled: false
-xpack.ml.enabled: false
-xpack.graph.enabled: false
-xpack.watcher.enabled: false
-xpack.grokdebugger.enabled: false
-xpack.searchprofiler.enabled: false
+# xpack.apm.enabled: false
+# xpack.monitoring.ui.enabled: false
+# xpack.monitoring.enabled: false
+# xpack.ml.enabled: false
+# xpack.graph.enabled: false
+# xpack.watcher.enabled: false
+# xpack.grokdebugger.enabled: false
+# xpack.searchprofiler.enabled: false
